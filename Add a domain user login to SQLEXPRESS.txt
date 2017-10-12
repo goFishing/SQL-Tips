@@ -1,0 +1,13 @@
+HOW TO: Add a domain user login to SQLEXPRESS with sysadmin priv.
+
+Right click on the SQLEXPRESS Service process (task maneger?), select PROPERTIES, then stop the process
+add the -m (single user mode) Start Parameter and re-start the process.
+
+open the CMD prompt and run...
+
+osql -S .\sqlexpress -E
+create login [domain\user] from windows
+go
+exec sp_addsrvrolemember @loginame= ‘domain\user’, @rolename='sysadmin'
+go
+
